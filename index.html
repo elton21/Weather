@@ -35,7 +35,7 @@ video{
 
 
 body input {
-    width: 620px;
+    width: 320px;
     height: 30px;
     border-radius: 5px;
     background: transparent;
@@ -45,12 +45,22 @@ body input {
 }
 .location, .temperature{
     height: 30vh;
-    width: 50%;
+    width: 40%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     
 }
+
+.location{
+    align-items: center;
+}
+
+.icon{
+    align-items: center;
+    margin-top: -50px;
+}
+
 
 .temperature{
     flex-direction: column;
@@ -65,11 +75,11 @@ body input {
 
 .degree-section span {
    margin: 5px;
-   font-size: 40px;
+   font-size: 30px;
 }
 
 .degree-section h2 {
-    font-size: 80px;
+    font-size: 60px;
   
 
 }
@@ -84,7 +94,7 @@ body input {
 }
 
 .temperature-description{
-    font-size: 50px;
+    font-size: 30px;
 }
 
    </style>
@@ -98,8 +108,8 @@ body input {
 </div>
     <div class="location">
         <h1 class="location-timezone">Cidade</h1>
-        <canvas class="icon" width="100" height="100"></canvas>
     </div>
+    <canvas class="icon" width="100" height="100">okkkkk</canvas>
     <div class="temperature">
         <div class="degree-section">
             <h2 class="temperature-degree">34</h2>
@@ -108,7 +118,7 @@ body input {
         <div class="temperature-description">  It's cold </div>
     </div>
     
-    <script src="skycons-master/skycons.js"></script>
+    <script src="skycons.js"></script>
 
     <script>
 
