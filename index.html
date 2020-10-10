@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheather</title>
+   <style>
+       *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to right, #e91e63, #3151b5);
+    font-family: sans-serif;
+    color:white;
+}
+
+video{
+   pointer-events: none;
+   position: fixed;
+   top:0%;
+   left: 0%;
+   width:100%;
+   z-index: -10;
+   opacity: 1;
+
+}
+
+
+body input {
+    width: 320px;
+    height: 30px;
+    border-radius: 5px;
+    background: transparent;
+    border-color:white;
+    margin-top: 70px;
+    font-size: 20px;
+}
+.location, .temperature{
+    height: 30vh;
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.location{
+  
+    align-items: center;
+    margin-top: -50PX;
+}
+
+.icon{
+    align-items: center;
+}
+
+
+.temperature{
+    flex-direction: column;
+}
+
+
+.degree-section{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.degree-section span {
+   margin: 5px;
+   font-size: 30px;
+}
+
+.degree-section h2 {
+    font-size: 60px;
+  
+
+}
+
+.input{
+    color:white;
+}
+.btn{
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: white;
+}
+
+.temperature-description{
+    font-size: 30px;
+}
+
+   </style>
+</head>
+<body>
+    
+    <h1>Pesquisa</h1>
+    <div class="navpes"">
+         <input class="input"type="text" id="fname" name="fname">
+         <button class="btn" type="button">Submit</button>
+</div>
+    <div class="location">
+        <h1 class="location-timezone">Cidade</h1>
+    </div>
+    <canvas class="icon" width="100" height="100">okkkkk</canvas>
+    <div class="temperature">
+        <div class="degree-section">
+            <h2 class="temperature-degree">34</h2>
+            <span>C</span>
+        </div>
+        <div class="temperature-description">  It's cold </div>
+    </div>
+    
+    <script src="skycons-master/skycons.js"></script>
+
+    <script>
+
+
+var timezone = document.querySelector(".location-timezone");
+var temperature = document.querySelector(".temperature-degree");
+var tempDescription = document.querySelector(".temperature-description");
+var inputvalue = document.querySelector(".input");
+var btn = document.querySelector(".btn");
+
+btn.addEventListener("click", function(){
+    fetch('https://api.openweathermap.org/data/2.5/weather?q='+inputvalue.value+'&appid=23768ae744791f0e805f42ea55ad1787&units=metric')
+    .then(response => response.json())
+    .then(data => {
+    console.log(data);
+    timezone.innerHTML = data['name'];
+    var aux = data.main.temp;
+    temperature.innerHTML = Math.ceil(aux);
+    tempDescription.innerHTML = data.weather[0].description;
+    setIcons(data.weather[0].main);
+   })
+});
+
+function setIcons(d){
+    const skycons = new Skycons({"color": "white"});
+    if(d === "Rain"){
+        skycons.add(document.querySelector(".icon"), Skycons.RAIN);
+    } else if(d === "Wind"){
+        skycons.add(document.querySelector(".icon"), Skycons.WIND);
+    }else if(d ==="Clouds"){
+        skycons.add(document.querySelector(".icon"), Skycons.CLOUDY);
+    }
+    else if(d === "Snow"){
+        skycons.add(document.querySelector(".icon"), Skycons.SNOW);
+    }else if(d == "Clear"){
+        skycons.add(document.querySelector(".icon"), Skycons.CLEAR_DAY);
+    }
+    skycons.play();
+}
+
+
+
+//23768ae744791f0e805f42ea55ad1787
+    </script>
+</body>
+</html>
